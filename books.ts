@@ -29,14 +29,10 @@ export interface Audiobook {
 export type Book = Comic | Audiobook;
 export type Chapter = ComicChapter | AudiobookChapter;
 
-export function getPrologueChapter<T extends Chapter>(
-  chapters: Array<T>
-): T | undefined {
-  return chapters.find((chapter) => chapter.type === "prologue");
+export function getPrologue<T extends Book>(
+  book: T
+): T["chapters"][0] | undefined {
+  return book.chapters
+    .map((chapter) => ({ isPrologue: chapter.type === "prologue", chapter }))
+    .find((chapter) => chapter.isPrologue)?.chapter;
 }
-
-// export function getPrologue<T extends Book>(
-//   book: T
-// ): T["chapters"][0] | undefined {
-//   return getPrologueChapter(book.chapters);
-// }
