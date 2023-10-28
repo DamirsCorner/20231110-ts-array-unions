@@ -1,5 +1,9 @@
 import { describe, expect, test } from "@jest/globals";
-import { Audiobook, Comic, getPrologue } from "./books";
+import {
+  Audiobook,
+  Comic,
+  /* getPrologue, */ getPrologueChapter,
+} from "./books";
 
 describe("get prologue", () => {
   test("works for comics", () => {
@@ -71,7 +75,7 @@ describe("get prologue", () => {
       ],
     };
 
-    const prologue = getPrologue(comic);
+    const prologue = getPrologueChapter(comic.chapters);
 
     expect(prologue?.pages).toEqual(36);
   });
@@ -135,7 +139,7 @@ describe("get prologue", () => {
       ],
     };
 
-    const prologue = getPrologue(audiobook);
+    const prologue = getPrologueChapter(audiobook.chapters);
 
     expect(prologue?.duration).toEqual(16);
   });
